@@ -1,0 +1,21 @@
+#component-main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#component-top-controls {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#component-header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}

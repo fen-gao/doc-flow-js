@@ -1,0 +1,110 @@
+/* Estilos do conteúdo */
+.content-area {
+  min-height: 100px;
+  padding: 10px 0;
+}
+
+.content-area p {
+  margin: 0;
+  padding: 5px 0;
+}
+
+/* Remove all default styles from the input */
+.input-field {
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 1rem;
+  font-family: inherit;
+  width: 100%;
+  padding: 5px 0;
+}
+
+#untitle {
+  color: lightgray;
+}
+
+/* Estilos dos placeholders */
+#untitle[data-placeholder]:empty:before,
+[data-placeholder]:empty:before {
+  content: attr(data-placeholder);
+  color: lightgray;
+}
+
+#inputField::placeholder {
+  color: lightgray;
+  opacity: 1;
+  padding: 5px 0;
+}
+
+#inputField:focus::placeholder {
+  color: lightgray;
+}
+
+#inputField:focus:valid::placeholder {
+  color: transparent;
+}
+
+.editable-content {
+  font-size: 25;
+}
+
+#untitle {
+  font-size: 25px;
+  color: lightgray;
+}
+
+.filter-input {
+  border: none;
+  outline: none;
+  background: none;
+  padding: 5px 0;
+  font-size: 1rem;
+  font-family: inherit;
+  width: 100%;
+}
+
+.filtering-type {
+  background-color: #375f9a;
+  padding: 2px;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.icon-wrapper__controller {
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #d9f8e6;
+  padding: 6px 8px;
+}
+
+.icon-wrapper__controller .initial {
+  color: #36765b;
+  font-size: 14px;
+}
+
+#component-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input.text-input {
+  width: 100%;
+  font-size: 2em;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  outline: none;
+  color: black;
+}
+
+input.text-input::placeholder {
+  color: lightgray;
+}

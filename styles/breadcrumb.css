@@ -1,0 +1,54 @@
+/* I created this file to store all the styles related to the breadcrumb component. */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 5px;
+  margin: 15px 10px 0 10px;
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.breadcrumb-item + .breadcrumb-item:before {
+  content: "/";
+  padding: 5px 0;
+  color: #b4b5bb;
+}
+
+.breadcrumb-item a {
+  text-decoration: none;
+  color: #b4b5bb;
+}
+
+.breadcrumb-item a:hover {
+  color: #6c7280;
+}
+
+.breadcrumb-item a.active-item {
+  text-decoration: underline;
+  color: #6c7280;
+  font-weight: lighter;
+}
+
+.breadcrumb-icon {
+  width: 16px;
+  height: 16px;
+  margin-left: 5px;
+}
+
+/* Styles for the document actions component */
+.document-actions {
+  display: flex;
+  align-items: center;
+}
+
+.editing-action:hover {
+  color: #6c7280;
+}

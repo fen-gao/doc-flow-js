@@ -1,0 +1,71 @@
+/* I created this file to store all the styles related to the icons. */
+.icon {
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 32px;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 20px;
+}
+
+.initial {
+  font-size: 16px;
+  font-weight: bold;
+  color: #757575;
+}
+
+.details {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.time {
+  margin-right: 10px;
+  color: #757575;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+}
+
+.error-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.action-icon {
+  width: 16px;
+  height: 16px;
+  margin-left: 5px;
+}
+
+.more-options {
+  cursor: pointer;
+  color: #757575;
+}
+
+.red-circle-status {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.diagonal-arrow {
+  rotate: 180deg;
+}
+
+.more-options {
+  font-size: 20px;
+  font-weight: bold;
+}
