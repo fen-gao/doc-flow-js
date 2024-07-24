@@ -329,4 +329,4 @@ document.addEventListener("scroll", function () {
   }
 });
 
-console.log("Editor script atualizado carregado com sucesso!");
+console.log("Script loaded successfully!");
