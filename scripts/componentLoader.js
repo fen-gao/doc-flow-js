@@ -1,9 +1,3 @@
-/**
- * This function loads a component from a specified file path.
- * @param {*} componentId The ID of the component to be loaded.
- * @param {*} filePath The file path of the component to be loaded.
- * @returns {void} This function does not return anything.
- */
 const loadComponent = (componentId, filePath) => {
   fetch(filePath)
     .then((response) => {
@@ -25,21 +19,29 @@ const loadComponent = (componentId, filePath) => {
     .catch((error) => console.error(`Erro loading ${componentId}:`, error));
 };
 
-/**
- * This function initializes all components.
- * @returns {void} This function does not return anything.
- */
 const initializeComponents = () => {
-  loadComponent("component-header", "components/header/index.html");
-  loadComponent("component-top-controls", "components/top-controls/index.html");
-  loadComponent(
-    "component-content-wrapper",
-    "components/content-wrapper/index.html"
-  );
-  loadComponent("component-content-area", "components/content-area/index.html");
-  loadComponent("component-dropdown", "components/dropdown/index.html");
-  loadComponent(
-    "component-dropdown-items",
-    "components/dropdown-items/index.html"
-  );
+  const components = [
+    { id: "component-header", path: "components/header/index.html" },
+    {
+      id: "component-top-controls",
+      path: "components/top-controls/index.html",
+    },
+    {
+      id: "component-content-wrapper",
+      path: "components/content-wrapper/index.html",
+    },
+    {
+      id: "component-content-area",
+      path: "components/content-area/index.html",
+    },
+    { id: "component-dropdown", path: "components/dropdown/index.html" },
+    {
+      id: "component-dropdown-items",
+      path: "components/dropdown-items/index.html",
+    },
+  ];
+
+  components.forEach(({ id, path }) => {
+    loadComponent(id, path);
+  });
 };
