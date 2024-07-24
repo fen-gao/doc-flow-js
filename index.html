@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Front-end Developer Test Project</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="text.css" />
+    <link rel="stylesheet" href="background.css" />
+    <link rel="stylesheet" href="typography.css" />
+    <link rel="stylesheet" href="utilities.css" />
+    <link rel="stylesheet" href="space.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="top-bar">
+        <nav class="breadcrumb flex-wrap" aria-label="Breadcrumb">
+          <ul class="breadcrumb">
+            <div>
+              <img src="./assets/arrow.svg" alt="arrow" class="arrow" />
+            </div>
+            <li class="breadcrumb-item">
+              <img src="./assets/book.svg" alt="book" class="book" />
+              <a class="active-item" href="#">Main</a>
+            </li>
+            <li class="breadcrumb-item"><a href="#">Getting started</a></li>
+            <li class="breadcrumb-item">
+              <a href="#" class="file-title"
+                >Front-end developer test proje...</a
+              >
+            </li>
+          </ul>
+          <div class="breadcrumb document-actions gap-4">
+            <button class="text-gray-400 flex gap-2 items-center">
+              <div class="flex">
+                <img src="./assets/padlock.svg" alt="padlock" class="padlock" />
+              </div>
+              <span class="editing-action"> Editing </span>
+            </button>
+            <span class="text-gray-300">|</span>
+            <button class="flex gap-2 items-center">
+              <span class="text-blue-800 font-semibold">Publish Space</span>
+              <div class="flex items-center justify-center">
+                <img
+                  src="./assets/arrow-down.svg"
+                  alt="arrow-down"
+                  class="arrow-down"
+                />
+              </div>
+            </button>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="component gap-1 justify-between">
+        <div class="flex items-center gap-2">
+          <button class="icon">
+            <div class="initial">P</div>
+          </button>
+          <span class="text-gray-300">|</span>
+          <button class="details gap-1">
+            <img src="./assets/oclock.svg" alt="oclock" class="oclock" />
+            <span class="time">0 min</span>
+          </button>
+          <span class="text-gray-300">|</span>
+          <button class="details">
+            <div class="red-circle-status bg-red-400"></div>
+          </button>
+          <span class="text-gray-300">|</span>
+          <button class="details gap-2">
+            <img
+              src="./assets/diagonal-arrow.svg"
+              alt="diagonal-arrow"
+              class="diagonal-arrow"
+            />
+            <span class="time">0</span>
+          </button>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <button class="flex items-center justify-center">
+            <img
+              src="./assets/check-circule.svg"
+              alt="check-circule"
+              class="check-circule"
+            />
+          </button>
+          <button class="flex items-center justify-center">
+            <img src="./assets/cloud.svg" alt="cloud" class="cloud" />
+          </button>
+          <button class="more-options font-bold">⋮</button>
+        </div>
+      </div>
+
+      <div class="content-wrapper flex flex-col gap-4">
+        <h1 id="untitle">Untitle</h1>
+        <div class="divider-bar"></div>
+
+        <div class="content-area" id="contentArea">
+          <input
+            type="text"
+            placeholder="Type / for blocks, @ to link docs or people"
+            id="inputField"
+            class="input-field"
+          />
+          <div class="dropdown" id="dropdown">
+            <header class="flex flex-col gap-2 header-dropdown items-start">
+              <h3>Add blocks</h3>
+              <input
+                type="text"
+                placeholder="Keep typing to filter, or escape to exit"
+                class="filter-input"
+                id="filterInput"
+              />
+              <div class="flex gap-2 items-center mt-4 text-sm text-gray-500">
+                <span>Filtering Keyword</span>
+                <div class="filtering-type">0</div>
+              </div>
+            </header>
+
+            <div class="dropdown-item" data-type="h1">
+              <div class="icon">T</div>
+              <div class="text">
+                <div class="title">Heading 1</div>
+                <div class="shortcut">Shortcut: type / + 1</div>
+              </div>
+            </div>
+            <div class="dropdown-item" data-type="h2">
+              <div class="icon">T</div>
+              <div class="text">
+                <div class="title">Heading 2</div>
+                <div class="shortcut">Shortcut: type >>/ + 2</div>
+              </div>
+            </div>
+            <div class="dropdown-item" data-type="h3">
+              <div class="icon">T</div>
+              <div class="text">
+                <div class="title">Heading 3</div>
+                <div class="shortcut">Shortcut: type >>>/ + 3</div>
+              </div>
+            </div>
+            <div class="dropdown-item" data-type="bullet">
+              <div class="icon">T</div>
+              <div class="text">
+                <div class="title">Bullet list</div>
+                <div class="shortcut">Shortcut: type >>>/ + 4</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
