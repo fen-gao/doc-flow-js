@@ -18,19 +18,21 @@ function updateFileTitle(text) {
   fileTitleElement.textContent = truncatedText;
 }
 
-// Função para tornar um elemento editável
+// Modifique a função makeEditable para incluir o placeholder no input
 function makeEditable(element) {
-  // Evita a criação de múltiplos campos de entrada no duplo clique
   if (currentEditingElement) {
     finishEditingCurrentElement();
   }
 
-  // Oculta o inputField durante a edição
-  inputField.style.display = "none";
-
-  const text = element.textContent;
+  const text =
+    element.textContent.trim() === element.dataset.placeholder
+      ? ""
+      : element.textContent;
+  element.innerHTML = "";
   const input = document.createElement("input");
   input.value = text;
+  input.placeholder = element.dataset.placeholder;
+  input.classList.add("text-input");
   input.style.width = "100%";
   input.style.fontSize = window.getComputedStyle(element).fontSize;
   input.style.fontWeight = window.getComputedStyle(element).fontWeight;
@@ -41,47 +43,32 @@ function makeEditable(element) {
   input.style.background = "transparent";
   input.style.outline = "none";
   input.style.caretColor = "black";
+  input.style.color = text.trim() === "" ? "lightgray" : "black";
 
-  element.textContent = "";
   element.appendChild(input);
   input.focus();
+  input.select(); // Seleciona todo o texto no modo de edição
 
   currentEditingElement = element;
+  inputField.style.display = "none";
 
   input.addEventListener("input", function () {
     if (element.id === "untitle") {
       updateFileTitle(input.value);
     }
+    input.style.color = input.value.trim() === "" ? "lightgray" : "black";
   });
 
-  function finishEditing() {
-    let newText = input.value.trim();
-    if (newText === "" && element.id === "untitle") {
-      newText = "Untitle";
-    }
-    element.removeChild(input);
-    element.textContent = newText;
-    element.classList.add("text-ellipsis");
-
-    if (element.id === "untitle") {
-      updateFileTitle(newText);
-    }
-
-    // Mostra o inputField após a edição
-    inputField.style.display = "block";
-    inputField.focus();
-    currentEditingElement = null;
-  }
-
-  input.addEventListener("blur", finishEditing);
+  input.addEventListener("blur", finishEditingCurrentElement);
 
   input.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
       e.preventDefault();
-      finishEditing();
+      finishEditingCurrentElement();
+      showMainInput();
     } else if (e.key === "Escape") {
       e.preventDefault();
-      finishEditing();
+      finishEditingCurrentElement();
     }
   });
 }
@@ -91,54 +78,61 @@ titleElement.addEventListener("click", function () {
   makeEditable(this);
 });
 
+// Adiciona um event listener para o evento de duplo clique no título
+titleElement.addEventListener("dblclick", function () {
+  makeEditable(this);
+});
+
 // Função para adicionar novo conteúdo
-function addContent(text) {
-  let element;
-  switch (selectedType) {
+function addContent(type) {
+  let element = document.createElement("div");
+  element.classList.add("editable-content");
+
+  let placeholder;
+  switch (type) {
     case "h1":
-      element = document.createElement("h1");
+      placeholder = "Heading 1";
+      element.style.fontSize = "24px";
+      element.style.fontWeight = "bold";
       break;
     case "h2":
-      element = document.createElement("h2");
+      placeholder = "Heading 2";
+      element.style.fontSize = "20px";
+      element.style.fontWeight = "bold";
       break;
     case "h3":
-      element = document.createElement("h3");
+      placeholder = "Heading 3";
+      element.style.fontSize = "16px";
+      element.style.fontWeight = "bold";
       break;
     case "bullet":
-      element = document.createElement("ul");
-      const li = document.createElement("li");
-      li.textContent = text;
-      element.appendChild(li);
+      placeholder = "List item";
+      element.style.paddingLeft = "20px";
+      element.textContent = "• ";
       break;
     default:
-      element = document.createElement("p");
+      placeholder = "Type your text here";
+      element.style.fontSize = "14px";
   }
 
-  if (selectedType !== "bullet") {
-    element.textContent = text;
+  element.dataset.placeholder = placeholder;
+  if (type !== "bullet") {
+    element.textContent = placeholder;
   }
+  element.style.color = "lightgray";
 
-  // Adiciona a classe de elipse para os elementos de texto
-  element.classList.add("text-ellipsis");
-
-  // Insere o novo elemento antes do inputField
   contentArea.insertBefore(element, inputField);
 
-  // Adiciona evento de clique para edição
-  if (selectedType !== "bullet") {
-    element.addEventListener("click", function () {
-      makeEditable(this);
-    });
+  makeEditable(element);
+
+  // Focar no elemento recém-criado
+  const input = element.querySelector("input");
+  if (input) {
+    input.focus();
   }
-
-  selectedType = null;
-
-  // Mantém o foco no inputField e o rola para a visão
-  inputField.focus();
-  inputField.scrollIntoView({ behavior: "smooth", block: "end" });
 }
 
-// Função para mostrar o dropdown
+// Funções para mostrar e esconder o dropdown
 function showDropdown() {
   const rect = inputField.getBoundingClientRect();
   dropdown.style.top = `${rect.bottom + window.scrollY}px`;
@@ -147,7 +141,6 @@ function showDropdown() {
   filterInput.focus();
 }
 
-// Função para esconder o dropdown
 function hideDropdown() {
   dropdown.style.display = "none";
   filterInput.value = "";
@@ -159,32 +152,28 @@ function handleDropdownSelection(type) {
     case "1":
     case "h1":
       selectedType = "h1";
-      inputField.placeholder = "";
       break;
     case "2":
     case "h2":
       selectedType = "h2";
-      inputField.placeholder = "";
       break;
     case "3":
     case "h3":
       selectedType = "h3";
-      inputField.placeholder = "";
       break;
     case "4":
     case "bullet":
       selectedType = "bullet";
-      inputField.placeholder = "";
       break;
     default:
       selectedType = null;
-      inputField.placeholder = "Type / for blocks, @ to link docs or people";
       return;
   }
 
   hideDropdown();
-  inputField.focus();
-  inputField.value = ""; // Limpa o campo de entrada
+  addContent(selectedType);
+  inputField.value = "";
+  inputField.placeholder = "Type / for blocks, @ to link docs or people";
 }
 
 // Função para filtrar os itens do dropdown
@@ -206,7 +195,7 @@ function filterDropdown() {
   filterKeyword.textContent = count;
 }
 
-// Event listener para o dropdown
+// Event listeners
 dropdown.addEventListener("click", function (e) {
   if (e.target.classList.contains("dropdown-item")) {
     const type = e.target.getAttribute("data-type");
@@ -214,7 +203,6 @@ dropdown.addEventListener("click", function (e) {
   }
 });
 
-// Event listener para keydown no inputField
 inputField.addEventListener("keydown", function (e) {
   if (e.key === "/") {
     e.preventDefault();
@@ -226,13 +214,12 @@ inputField.addEventListener("keydown", function (e) {
     isSlashMode = false;
   } else if (e.key === "Enter") {
     e.preventDefault();
-    if (inputField.value.trim() !== "") {
-      addContent(inputField.value);
-      inputField.value = "";
-      selectedType = null;
-      inputField.placeholder = "Type / for blocks, @ to link docs or people";
+    if (selectedType) {
+      addContent(selectedType);
+    } else if (inputField.value.trim() !== "") {
+      addContent("p");
     }
-    hideDropdown();
+    showMainInput();
     isSlashMode = false;
   } else if (e.key === "Escape") {
     selectedType = null;
@@ -244,7 +231,6 @@ inputField.addEventListener("keydown", function (e) {
   }
 });
 
-// Event listener para input no inputField
 inputField.addEventListener("input", function (e) {
   if (e.target.value === "/") {
     isSlashMode = true;
@@ -254,7 +240,6 @@ inputField.addEventListener("input", function (e) {
   }
 });
 
-// Event listener para input no filterInput
 filterInput.addEventListener("input", filterDropdown);
 
 filterInput.addEventListener("keydown", function (e) {
@@ -272,7 +257,6 @@ filterInput.addEventListener("keydown", function (e) {
   }
 });
 
-// Evento para salvar a linha ao clicar fora dela
 document.addEventListener("click", function (e) {
   if (
     currentEditingElement &&
@@ -283,34 +267,56 @@ document.addEventListener("click", function (e) {
   }
 });
 
+// Função para finalizar a edição do elemento atual
 function finishEditingCurrentElement() {
   if (currentEditingElement) {
     const input = currentEditingElement.querySelector("input");
     let newText = input.value.trim();
-    if (newText === "" && currentEditingElement.id === "untitle") {
+
+    if (newText === "") {
+      newText = currentEditingElement.dataset.placeholder || "Untitle";
+      currentEditingElement.style.color = "lightgray";
+    } else {
+      currentEditingElement.style.color = "black";
+    }
+
+    if (currentEditingElement.id === "untitle" && newText === "") {
       newText = "Untitle";
     }
-    currentEditingElement.removeChild(input);
+
     currentEditingElement.textContent = newText;
-    currentEditingElement.classList.add("text-ellipsis");
 
     if (currentEditingElement.id === "untitle") {
       updateFileTitle(newText);
     }
 
-    inputField.style.display = "block";
-    inputField.focus();
     currentEditingElement = null;
+    showMainInput();
   }
 }
 
-// Inicializa o título do arquivo
-updateFileTitle(titleElement.textContent);
+// Função para mostrar o input principal
+function showMainInput() {
+  inputField.style.display = "block";
+  inputField.value = "";
+  inputField.placeholder = "Type / for blocks, @ to link docs or people";
+  inputField.style.color = "lightgray";
+  inputField.focus();
+}
 
-// Garante que o inputField esteja sempre no final do contentArea
+// Event listener para o contentArea
+contentArea.addEventListener("click", function (e) {
+  if (e.target === contentArea) {
+    showMainInput();
+  }
+});
+
+// Inicialização
+titleElement.dataset.placeholder = "Untitle";
+updateFileTitle(titleElement.textContent);
 contentArea.appendChild(inputField);
 
-// Adicione estes event listeners no final do script
+// Event listeners para resize e scroll
 window.addEventListener("resize", function () {
   if (dropdown.style.display === "block") {
     showDropdown();
@@ -323,4 +329,4 @@ document.addEventListener("scroll", function () {
   }
 });
 
-console.log("Editor script carregado com sucesso!");
+console.log("Editor script atualizado carregado com sucesso!");
