@@ -1,5 +1,5 @@
 const showDropdown = () => {
-  console.log("showDropdown calledd");
+  console.log("showDropdown called");
   const inputField = document.getElementById("inputField");
   const dropdown = document.getElementById("dropdown");
   if (!inputField || !dropdown) {
@@ -28,15 +28,15 @@ const hideDropdown = () => {
   }
 };
 
-function handleDropdownSelection(type) {
+const handleDropdownSelection = (type) => {
   console.log("handleDropdownSelection chamada com tipo:", type);
   selectedType = getSelectedType(type);
   hideDropdown();
   addContent(selectedType);
   resetInputField();
-}
+};
 
-function filterDropdown() {
+const filterDropdown = () => {
   console.log("filterDropdown chamada");
   const filterInput = document.getElementById("filterInput");
   if (!filterInput) {
@@ -60,4 +60,4 @@ function filterDropdown() {
 
   document.querySelector(".filtering-type").textContent = count;
   console.log("Dropdown filtrado, itens visíveis:", count);
-}
+};
