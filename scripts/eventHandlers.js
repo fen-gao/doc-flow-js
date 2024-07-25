@@ -13,7 +13,8 @@ const handleInputFieldKeydown = (e) => {
     if (text) {
       addContent(selectedType || "p", text);
     } else {
-      addContent("p");
+      const newElement = createNewLine();
+      makeEditable(newElement);
     }
 
     selectedType = "p";
@@ -58,7 +59,8 @@ const handleEditableInputKeydown = (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
     finishEditingCurrentElement();
-    addContent("p");
+    const newElement = createNewLine();
+    makeEditable(newElement);
   } else if (e.key === "Escape") {
     e.preventDefault();
     finishEditingCurrentElement();

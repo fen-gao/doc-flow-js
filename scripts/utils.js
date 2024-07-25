@@ -30,7 +30,7 @@ const getElementStyles = (type) => {
       return {
         fontSize: "14px",
         fontWeight: "normal",
-        placeholder: "Type your text here",
+        placeholder: "Type / for blocks, @ to link docs or people",
       };
   }
 };

@@ -58,3 +58,20 @@ const finishEditingCurrentElement = () => {
     showMainInput();
   }
 };
+
+const createNewLine = () => {
+  const newElement = document.createElement("p");
+  newElement.classList.add("editable-content");
+  newElement.textContent = "Type / for blocks, @ to link docs or people";
+  newElement.style.color = "lightgray";
+  newElement.dataset.placeholder =
+    "Type / for blocks, @ to link docs or people";
+
+  const contentArea = document.getElementById("contentArea");
+  if (contentArea) {
+    contentArea.insertBefore(newElement, document.getElementById("inputField"));
+    newElement.addEventListener("click", () => makeEditable(newElement));
+  }
+
+  return newElement;
+};
