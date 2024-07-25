@@ -1,7 +1,3 @@
-/**
- * This function initializes all components.
- * @returns {void} This function does not return anything.
- */
 document.addEventListener("DOMContentLoaded", () => {
   initializeComponents();
 
@@ -12,6 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (titleElement && contentArea && inputField) {
     titleElement.dataset.placeholder = "Untitled";
     updateFileTitle(titleElement.textContent);
+
+    // Add click event listener to make the title editable
+    titleElement.addEventListener("click", () => makeEditable(titleElement));
 
     console.log("Components loaded successfully!");
   } else {

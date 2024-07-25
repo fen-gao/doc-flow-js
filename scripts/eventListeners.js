@@ -1,8 +1,3 @@
-/**
- * This function initializes the listeners for a specific component.
- * @param {*} componentId The ID of the component to be initialized.
- * @returns {void} This function does not return anything.
- */
 const initializeComponentListeners = (componentId) => {
   switch (componentId) {
     case "component-header":
@@ -24,11 +19,10 @@ const initializeComponentListeners = (componentId) => {
       break;
     case "component-dropdown":
       initializeDropdownListeners();
-      registerDropdownItemClickEvents(); // Certifique-se de que os eventos de clique são registrados após carregar os itens
+      registerDropdownItemClickEvents();
       break;
     case "component-dropdown-items":
-      // Listeners específicos do dropdown items
-      registerDropdownItemClickEvents(); // Certifique-se de que os eventos de clique são registrados após carregar os itens
+      registerDropdownItemClickEvents();
       break;
   }
 };
@@ -42,6 +36,12 @@ const initializeContentAreaListeners = () => {
     inputField.style.fontSize = "14px";
     inputField.style.fontWeight = "normal";
   }
+
+  // Add click event listeners to all existing editable content
+  const editableElements = document.querySelectorAll(".editable-content");
+  editableElements.forEach((element) => {
+    element.addEventListener("click", () => makeEditable(element));
+  });
 };
 
 const initializeDropdownListeners = () => {

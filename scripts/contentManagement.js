@@ -1,12 +1,6 @@
 let isSlashMode = false;
 let selectedType = "p";
 
-/**
- *
- * @param {*} type the type of content to be added
- * @param {*} text the text to be added
- * @returns {void} this function does not return anything
- */
 const addContent = (type, text = "") => {
   const contentArea = document.getElementById("contentArea");
 
@@ -34,16 +28,14 @@ const addContent = (type, text = "") => {
 
   contentArea.insertBefore(element, document.getElementById("inputField"));
 
+  // Add click event listener to make the element editable when clicked
+  element.addEventListener("click", () => makeEditable(element));
+
   if (!text) {
     makeEditable(element);
   }
 };
 
-/**
- * This function updates the file title.
- * @param {*} text The new text for the file title.
- * @returns {void} This function does not return anything.
- */
 const updateFileTitle = (text) => {
   const truncatedText = text.length > 30 ? text.substring(0, 27) + "..." : text;
   const fileTitleElement = document.querySelector(".file-title");

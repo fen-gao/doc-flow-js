@@ -1,9 +1,5 @@
 let currentEditingElement = null;
 
-/**
- * This function makes an element editable.
- * @param {*} element
- */
 const makeEditable = (element) => {
   if (currentEditingElement) {
     finishEditingCurrentElement();
@@ -38,10 +34,6 @@ const makeEditable = (element) => {
   input.addEventListener("keydown", handleEditableInputKeydown);
 };
 
-/*
- * This function finishes editing the current element.
- * @returns {void} This function does not return anything.
- */
 const finishEditingCurrentElement = () => {
   if (currentEditingElement) {
     const input = currentEditingElement.querySelector("input");

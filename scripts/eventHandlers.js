@@ -1,8 +1,3 @@
-/**
- * This function handles the keydown event on the input field.
- * @param {*} e The event object.
- * @returns {void} This function does not return anything.
- */
 const handleInputFieldKeydown = (e) => {
   if (e.key === "/") {
     e.preventDefault();
@@ -34,11 +29,6 @@ const handleInputFieldKeydown = (e) => {
   }
 };
 
-/**
- * This function handles the input event on the input field.
- * @param {*} e The event object.
- * @returns {void} This function does not return anything.
- */
 const handleInputFieldInput = (e) => {
   if (e.target.value === "/") {
     isSlashMode = true;
@@ -49,11 +39,6 @@ const handleInputFieldInput = (e) => {
   }
 };
 
-/**
- * This function handles the keydown event on the filter input.
- * @param {*} e The event object.
- * @returns {void} This function does not return anything.
- */
 const handleFilterInputKeydown = (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
@@ -69,11 +54,6 @@ const handleFilterInputKeydown = (e) => {
   }
 };
 
-/**
- * This function handles the keydown event on an editable input.
- * @param {*} e The event object.
- * @returns {void} This function does not return anything.
- */
 const handleEditableInputKeydown = (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
