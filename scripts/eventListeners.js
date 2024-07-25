@@ -50,3 +50,28 @@ const initializeDropdownListeners = () => {
     filterInput.addEventListener("keydown", handleFilterInputKeydown);
   }
 };
+
+// Certifique-se de que filterDropdown está definido
+const filterDropdown = () => {
+  const filterInput = document.getElementById("filterInput");
+  if (!filterInput) {
+    console.error("Erro: Elemento filterInput não encontrado.");
+    return;
+  }
+
+  const filterValue = filterInput.value.toLowerCase();
+  const items = document.querySelectorAll(".dropdown-item");
+
+  let count = 0;
+  items.forEach((item) => {
+    const text = item.querySelector(".title").textContent.toLowerCase();
+    if (text.includes(filterValue)) {
+      item.style.display = "flex";
+      count++;
+    } else {
+      item.style.display = "none";
+    }
+  });
+
+  document.querySelector(".filtering-type").textContent = count;
+};

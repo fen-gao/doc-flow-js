@@ -1,25 +1,24 @@
-const loadComponent = (componentId, filePath) => {
-  fetch(filePath)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.text();
-    })
-    .then((data) => {
-      const element = document.getElementById(componentId);
-      if (element) {
-        element.innerHTML = data;
-        console.log(`${componentId} loaded successfully!`);
-        initializeComponentListeners(componentId);
-      } else {
-        console.error(`Erro: Element with id ${componentId} not found.`);
-      }
-    })
-    .catch((error) => console.error(`Erro loading ${componentId}:`, error));
+const loadComponent = async (componentId, filePath) => {
+  try {
+    const response = await fetch(filePath);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.text();
+    const element = document.getElementById(componentId);
+    if (element) {
+      element.innerHTML = data;
+      console.log(`${componentId} loaded successfully!`);
+      initializeComponentListeners(componentId);
+    } else {
+      console.error(`Erro: Element with id ${componentId} not found.`);
+    }
+  } catch (error) {
+    console.error(`Erro loading ${componentId}:`, error);
+  }
 };
 
-const initializeComponents = () => {
+const initializeComponents = async () => {
   const components = [
     { id: "component-header", path: "components/header/index.html" },
     {
@@ -41,7 +40,9 @@ const initializeComponents = () => {
     },
   ];
 
-  components.forEach(({ id, path }) => {
-    loadComponent(id, path);
-  });
+  for (const { id, path } of components) {
+    await loadComponent(id, path);
+  }
 };
+
+document.addEventListener("DOMContentLoaded", initializeComponents);
