@@ -1,4 +1,5 @@
 const showDropdown = () => {
+  console.log("showDropdown called");
   const inputField = document.getElementById("inputField");
   const dropdown = document.getElementById("dropdown");
   if (!inputField || !dropdown) {
@@ -14,24 +15,20 @@ const showDropdown = () => {
 };
 
 const hideDropdown = () => {
+  console.log("hideDropdown called");
   const dropdown = document.getElementById("dropdown");
   if (dropdown) {
     dropdown.style.display = "none";
     document.getElementById("filterInput").value = "";
     filterDropdown();
+    console.log("Dropdown hid");
   } else {
     console.error("Erro: The dropdown element is not found.");
   }
 };
 
-const handleDropdownSelection = (type) => {
-  selectedType = getSelectedType(type);
-  hideDropdown();
-  addContent(selectedType);
-  resetInputField();
-};
-
 const filterDropdown = () => {
+  console.log("filterDropdown chamada");
   const filterInput = document.getElementById("filterInput");
   if (!filterInput) {
     console.error("Erro: Elemento filterInput não encontrado.");
@@ -53,4 +50,13 @@ const filterDropdown = () => {
   });
 
   document.querySelector(".filtering-type").textContent = count;
+  console.log("Dropdown filtrado, itens visíveis:", count);
+};
+
+const handleDropdownSelection = (type) => {
+  console.log("handleDropdownSelection chamada com tipo:", type);
+  selectedType = getSelectedType(type);
+  hideDropdown();
+  addContent(selectedType);
+  resetInputField();
 };
