@@ -1,12 +1,11 @@
 /* Estilos do conteúdo */
 .content-area {
   min-height: 100px;
-  padding: 10px 0;
-}
-
-.content-area p {
   margin: 0;
   padding: 5px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 /* Remove all default styles from the input */
