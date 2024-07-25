@@ -28,10 +28,10 @@ const hideDropdown = () => {
 };
 
 const filterDropdown = () => {
-  console.log("filterDropdown chamada");
+  console.log("filterDropdown called");
   const filterInput = document.getElementById("filterInput");
   if (!filterInput) {
-    console.error("Erro: Elemento filterInput não encontrado.");
+    console.error("Erro: Element filterInput not found.");
     return;
   }
 
@@ -50,13 +50,27 @@ const filterDropdown = () => {
   });
 
   document.querySelector(".filtering-type").textContent = count;
-  console.log("Dropdown filtrado, itens visíveis:", count);
+  console.log("Dropdown filtered, visible items:", count);
 };
 
 const handleDropdownSelection = (type) => {
-  console.log("handleDropdownSelection chamada com tipo:", type);
+  console.log("handleDropdownSelection called with type:", type);
   selectedType = getSelectedType(type);
   hideDropdown();
   addContent(selectedType);
   resetInputField();
 };
+
+const registerDropdownItemClickEvents = () => {
+  const dropdownItems = document.querySelectorAll(".dropdown-item");
+  dropdownItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      const type = item.getAttribute("data-type");
+      handleDropdownSelection(type);
+    });
+  });
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  registerDropdownItemClickEvents();
+});

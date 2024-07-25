@@ -24,9 +24,11 @@ const initializeComponentListeners = (componentId) => {
       break;
     case "component-dropdown":
       initializeDropdownListeners();
+      registerDropdownItemClickEvents(); // Certifique-se de que os eventos de clique são registrados após carregar os itens
       break;
     case "component-dropdown-items":
       // Listeners específicos do dropdown items
+      registerDropdownItemClickEvents(); // Certifique-se de que os eventos de clique são registrados após carregar os itens
       break;
   }
 };
