@@ -15,4 +15,4 @@ In this project, i recreated a Notion-like editor, specifically focusing on the 
 
 ## Deployment Link
 
-[Insert your project deployment link here]
+[\[Insert your project deployment link here\]](https://helpjuice-frontend-challenge.vercel.app/)
