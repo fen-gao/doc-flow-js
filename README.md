@@ -2,12 +2,12 @@
 
 ## Project Overview
 
-In this project, i recreated a Notion-like editor, specifically focusing on the H1 heading component. The goal is to deliver a working prototype that closely matches the provided Figma design.
+In this project, I recreated a Notion-like editor, focusing on the H1 heading component. The goal is to deliver a functional prototype that closely matches the provided Figma design.
 
 ## Requirements
 
 - **Technology**: Use any technology you prefer, ideally Vanilla JS.
-- **Deployment**: Deploy the project on Heroku or any other platform for easy access and testing.
+- **Deployment**: Deploy the project on a platform like Heroku or any other for easy access and testing.
 
 ## Figma Prototype
 
@@ -15,4 +15,4 @@ In this project, i recreated a Notion-like editor, specifically focusing on the 
 
 ## Deployment Link
 
-[\[Insert your project deployment link here\]](https://helpjuice-frontend-challenge.vercel.app/)
+- **Live Demo**: [Notion-like Editor](https://helpjuice-frontend-challenge.vercel.app/)
