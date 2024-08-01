@@ -1,76 +1,122 @@
 const showDropdown = () => {
-  console.log("showDropdown called");
+  // Retrieve the input field and dropdown elements
   const inputField = document.getElementById("inputField");
   const dropdown = document.getElementById("dropdown");
+
+  // Check if the elements exist
   if (!inputField || !dropdown) {
-    console.error("Erro: The dropdown or inputField element is not found.");
+    console.error("Error: The dropdown or inputField element is not found.");
     return;
   }
 
+  // Get the bounding rectangle of the input field
   const rect = inputField.getBoundingClientRect();
+
+  // Position the dropdown below the input field
   dropdown.style.top = `${rect.bottom + window.scrollY}px`;
   dropdown.style.left = `${rect.left + window.scrollX}px`;
+
+  // Display the dropdown
   dropdown.style.display = "block";
-  document.getElementById("filterInput").focus();
+
+  // Set focus to the filter input inside the dropdown
+  document.getElementById("filterInput")?.focus();
 };
 
 const hideDropdown = () => {
-  console.log("hideDropdown called");
+  // Retrieve the dropdown element
   const dropdown = document.getElementById("dropdown");
+
+  // Check if the dropdown element exists
   if (dropdown) {
+    // Hide the dropdown
     dropdown.style.display = "none";
-    document.getElementById("filterInput").value = "";
+
+    // Clear the filter input value
+    const filterInput = document.getElementById("filterInput");
+    if (filterInput) {
+      filterInput.value = "";
+    }
+
+    // Call the filterDropdown function to reset the dropdown
     filterDropdown();
-    console.log("Dropdown hid");
   } else {
     console.error("Error: The dropdown element is not found.");
   }
 };
 
 const filterDropdown = () => {
-  console.log("filterDropdown called");
+  // Retrieve the filter input element
   const filterInput = document.getElementById("filterInput");
   if (!filterInput) {
-    console.error("Erro: Element filterInput not found.");
+    console.error("Error: Element filterInput not found.");
     return;
   }
 
+  // Get the filter value in lowercase
   const filterValue = filterInput.value.toLowerCase();
+
+  // Retrieve all dropdown items
   const items = document.querySelectorAll(".dropdown-item");
 
-  let count = 0;
+  let visibleItemCount = 0;
+
+  // Filter the dropdown items based on the filter value
   items.forEach((item) => {
-    const text = item.querySelector(".title").textContent.toLowerCase();
-    if (text.includes(filterValue)) {
-      item.style.display = "flex";
-      count++;
-    } else {
-      item.style.display = "none";
+    const titleElement = item.querySelector(".title");
+    if (titleElement) {
+      const text = titleElement.textContent.toLowerCase();
+      if (text.includes(filterValue)) {
+        item.style.display = "flex";
+        visibleItemCount++;
+      } else {
+        item.style.display = "none";
+      }
     }
   });
 
-  document.querySelector(".filtering-type").textContent = count;
-  console.log("Dropdown filtered, visible items:", count);
+  // Update the count of visible items
+  const filteringTypeElement = document.querySelector(".filtering-type");
+  if (filteringTypeElement) {
+    filteringTypeElement.textContent = visibleItemCount;
+  }
+
+  console.log("Dropdown filtered, visible items:", visibleItemCount);
 };
 
+// Handles the selection of a dropdown item
 const handleDropdownSelection = (type) => {
-  console.log("handleDropdownSelection called with type:", type);
-  selectedType = getSelectedType(type);
+  // Get the selected type based on the provided type
+  const selectedType = getSelectedType(type);
+
+  // Hide the dropdown
   hideDropdown();
+
+  // Add content based on the selected type
   addContent(selectedType);
+
+  // Reset the input field
   resetInputField();
 };
 
+// Registers click events for each dropdown item
 const registerDropdownItemClickEvents = () => {
+  // Retrieve all dropdown items
   const dropdownItems = document.querySelectorAll(".dropdown-item");
+
+  // Add click event listener to each dropdown item
   dropdownItems.forEach((item) => {
     item.addEventListener("click", () => {
+      // Get the type from the data-type attribute
       const type = item.getAttribute("data-type");
+
+      // Handle the dropdown selection
       handleDropdownSelection(type);
     });
   });
 };
 
+// Register dropdown item click events once the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
   registerDropdownItemClickEvents();
 });
