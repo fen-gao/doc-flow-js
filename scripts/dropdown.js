@@ -23,7 +23,7 @@ const hideDropdown = () => {
     filterDropdown();
     console.log("Dropdown hid");
   } else {
-    console.error("Erro: The dropdown element is not found.");
+    console.error("Error: The dropdown element is not found.");
   }
 };
 

@@ -73,5 +73,7 @@ const createNewLine = () => {
     newElement.addEventListener("click", () => makeEditable(newElement));
   }
 
+  showMainInput(); // Add this line to show the main input field
+
   return newElement;
 };

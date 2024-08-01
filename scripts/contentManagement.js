@@ -5,7 +5,7 @@ const addContent = (type, text = "") => {
   const contentArea = document.getElementById("contentArea");
 
   if (!contentArea) {
-    console.error("Erro: Element contentArea not found.");
+    console.error("Error: Element contentArea not found.");
     return;
   }
 
@@ -28,12 +28,14 @@ const addContent = (type, text = "") => {
 
   contentArea.insertBefore(element, document.getElementById("inputField"));
 
-  // Add click event listener to make the element editable when clicked
   element.addEventListener("click", () => makeEditable(element));
 
   if (!text) {
     makeEditable(element);
   }
+
+  // Reset selectedType to default after adding content
+  selectedType = "p";
 };
 
 const updateFileTitle = (text) => {

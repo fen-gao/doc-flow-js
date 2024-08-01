@@ -11,15 +11,31 @@ const handleInputFieldKeydown = (e) => {
     e.preventDefault();
     const text = e.target.value.trim();
     if (text) {
-      addContent(selectedType || "p", text);
+      let actualType = selectedType;
+      let actualText = text;
+
+      // Check if the text starts with a slash command
+      if (text.startsWith("/")) {
+        const parts = text.split(" ");
+        const command = parts[0].slice(1);
+        if (["1", "2", "3", "4"].includes(command)) {
+          actualType = getSelectedType(command);
+          actualText = parts.slice(1).join(" ");
+        } else {
+          // If it's an unrecognized command, treat it as normal text
+          actualType = "p";
+        }
+      }
+
+      addContent(actualType || "p", actualText);
     } else {
       const newElement = createNewLine();
       makeEditable(newElement);
     }
 
-    selectedType = "p";
     showMainInput();
     isSlashMode = false;
+    selectedType = "p"; // Reset selectedType to default after adding content
   } else if (e.key === "Escape") {
     selectedType = "p";
     e.target.placeholder = "Type / for blocks, @ to link docs or people";
