@@ -1,4 +1,4 @@
-# Notion Clone Project
+# Web Freemium Project
 
 ## Project Overview
 
