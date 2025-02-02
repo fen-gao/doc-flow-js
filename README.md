@@ -1,8 +1,8 @@
-# Web Freemium Project
+# Notation Project
 
 ## Project Overview
 
-In this project, I recreated a Web freenium for text editor, focusing on the H1 heading component. The goal is to deliver a functional prototype.
+In this project, I implemented a text editor like the notion, focusing on the H1 heading component. The goal is to deliver a functional prototype.
 
 ## Requirements
 
